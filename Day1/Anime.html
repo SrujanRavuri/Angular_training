@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ApiCall</title>
+    <link rel="stylesheet" type="text/css" href="C:\Users\ravuri.venkatasrujan\Desktop\mern stack\Misc\practise.css">
+</head>
+<script>
+    const api_url = "https://api.jikan.moe/v4/anime";
+    const ui=`<tr>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Rating</th>
+            <th>Airing</th>
+            </tr>`;
+    const ui2=`<tr>
+                <td>${item.title}</td>
+                <td>${item.type}</td>
+                <td>${item.status}</td>
+                <td>${item.rating}</td>
+                <td>${item.airing}</td>
+                </tr>`;
+    async function getapi(url) {
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log(data);
+        hideloader();
+        show(data);
+        return data;
+    }
+
+    function show(data) {
+        let anime = ui;
+        for (let item of data.data) {
+            anime += ui2;
+        }
+        document.getElementById("animelist").innerHTML = anime;
+    }
+
+    function airingtrue(data) {
+        let filteredanime = data.data.filter(animeair => animeair.airing === true);
+        console.log(filteredanime);
+        let anime = ui;
+        for (let item of filteredanime) {
+            anime +=ui2;
+        }
+        document.getElementById("animelist").innerHTML = anime;
+    }
+
+    function airingfalse(data) {
+        let filteredanime = data.data.filter(animeair => animeair.airing === false);
+        console.log(data);
+        let anime = ui;
+        for (let item of filteredanime) {
+            anime += ui2;
+        }
+        document.getElementById("animelist").innerHTML = anime;
+    }
+
+    function dropdown() {
+        const dropdownlist = document.getElementById("filteranime");
+        const selection = dropdownlist.value;
+        if (selection === "All") {
+            getapi(api_url);
+        } else if (selection === "Aired") {
+            getapi(api_url).then(data => airingtrue(data));
+        } else {
+            getapi(api_url).then(data => airingfalse(data));
+        }
+    }
+
+    function hideloader() {
+        document.getElementById('loading').style.display = 'none';
+    }
+
+    // Initial loading
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById('loading').style.display = 'block';
+        getapi(api_url);
+    });
+</script>
+<body>
+    <h2 class="Title">List of Anime</h2>
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border"
+             role="status" id="loading">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <select class="filterdropdown" id="filteranime" onchange="dropdown()">
+        <option value="All" selected>Show All</option>
+        <option value="Aired">Show Aired Anime</option>
+        <option value="Non-Aired">Show Non-Aired Anime</option>  
+    </select>
+    <table class="animelist" id="animelist"></table>
+</body>
+</html>

@@ -1,0 +1,22 @@
+body{
+    background-image: url('https://www.wallpapertip.com/wmimgs/114-1148819_tmc18-anime-background-wallpaper-anime-images-in-high.jpg');
+}
+.Title{
+    text-align: center;
+}
+.animelist{
+    border: 2px solid black;
+    padding:10px;
+    margin: 0 auto;
+}
+.filterdropdown{
+    margin-left:500px;
+}
+th{
+    background-color: darksalmon;
+}
+td{
+    background-color: bisque;
+    padding:10px;
+    margin:2px;
+}

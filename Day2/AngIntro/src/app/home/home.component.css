@@ -1,0 +1,27 @@
+
+.Title{
+    text-align: center;
+}
+.animelist{
+    border: 2px solid black;
+    padding:10px;
+    margin: 0 auto;
+}
+.filterdropdown{
+    margin-left:540px;
+    margin-bottom: 20px;
+    border:2px solid black;
+    padding:10px;
+}
+th{
+    background-color: darksalmon;
+
+}
+td{
+    background-color: bisque;
+    padding:20px;
+    border:2px solid grey;
+}
+tr{
+    margin:10px;
+}

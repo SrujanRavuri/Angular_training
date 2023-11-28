@@ -1,0 +1,21 @@
+
+<app-navbar></app-navbar>
+<!--<button (click)="counter()">counter</button>
+<app-post [fromParent]='parentMessage' [fromParent2]='count' [authors]="obj">
+  <h1>Dynamic data form parent</h1>
+</app-post>-->
+<p >{{message}}</p>
+<hr>
+<p>{{fromChildOutput}}</p>
+<app-post [fromParent]='parentMessage' [fromParent2]='count' [authors]="obj" (messageEvent)='receiveMessage($event)'>
+  <!--<app-authors-address [address]="address"></app-authors-address>-->
+</app-post>
+//Property Binding//
+<img src="{{imgUrl}}">
+<img [src]="imgUrl"><br>
+//Class Binding
+<h1 [class.text-red]="bool">Hello App</h1>
+//Style Binding
+<h1 [style.color]="bool? 'red':'aqua' ">Style Binding</h1>
+<!--Event Binding-->
+<button (click)="receiveMessage($event)">Click Me</button>
